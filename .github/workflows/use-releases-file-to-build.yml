@@ -28,7 +28,7 @@ on:
           - all
           - s905w_s905x_s905mb_s905l3a_s905l3b_s905x2_s905x3_s912_s922x_s922x-ct2000_s922x-reva
           - s905x3-x88-pro-x3_s912-m8s-pro_s905x-t95_s912-t95z-plus_s905l3-unt400g1_s905lb-r3300l
-          - s912-x92_s922x_s922x-ct2000_s922x-reva_seewo-sv21_smart-am40_station-m1_sw799_swan1-w28
+          - s912-x92_s922x_s922x-ct2000_s922x-reva_seewo-sv21_smart-am40_smart-am60_station-m1_sw799_swan1-w28
           - tanix-tx6_tb-ls3399_tn3399_tpm312_tqc-a01_tvi3315a_vplus_wxy-oec_xiaobao_yskj_zcube1-max_zk-r39a_zysj
           - a311d
           - beikeyun
@@ -204,7 +204,6 @@ on:
         type: choice
         options:
           - ophub/kernel
-          - dy008/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
@@ -215,7 +214,6 @@ on:
           - flippy
           - dev
           - beta
-          - rk3588
       armbian_fstype:
         description: "Select armbian rootfs type."
         required: false
@@ -240,7 +238,6 @@ on:
         options:
           - ophub
           - angel
-          - dy008
 
 env:
   TZ: America/New_York
@@ -302,7 +299,7 @@ jobs:
           armbian_buildpath="build/output/images"
           [[ -d "${armbian_buildpath}" ]] || mkdir -p "${armbian_buildpath}"
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/dy008/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
 
           latest_version=$(curl -s \
                 -H "Accept: application/vnd.github+json" \
@@ -330,7 +327,7 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Rebuild Armbian [ ${{ inputs.set_release }} ]
-        uses: dy008/amlogic-s9xxx-armbian@main
+        uses: ophub/amlogic-s9xxx-armbian@main
         if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: armbian
