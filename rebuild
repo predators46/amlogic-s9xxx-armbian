@@ -977,9 +977,9 @@ refactor_rootfs() {
     ln -sf usr/bin bin
     ln -sf usr/lib lib
     ln -sf usr/sbin sbin
-    ln -sf ../run/lock var/lock
-    ln -sf ../run var/run
-    ln -sf ../usr/share/zoneinfo/Asia/Shanghai etc/localtime
+    ln -sf /run/lock var/lock
+    ln -sf /run var/run
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai etc/localtime
     ln -sf armbian-ddbr usr/sbin/ddbr
 
     # Fix common releases permissions
