@@ -601,7 +601,7 @@ compile_env() {
         echo -e "${INFO} Use the .config file in the current directory."
     fi
     # Clear kernel signature
-    sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"\"|" .config
+    sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=|" .config
 
     # Enable/Disabled Linux Kernel Clang LTO
     [[ "${toolchain_name}" == "clang" ]] && {
